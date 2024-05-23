@@ -1,0 +1,41 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block content %}
+    <div id="content-main">
+        <div class="module">
+            <table style="width: 100%;">
+                <caption>PRODUCTOS</caption>
+                <tbody>
+                    {% for product in products %}
+                        <tr class="model-group">
+                            <th scope="row"><a href="#">{{ product }}</a></th>
+                            <td>{{ product.price }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div id="content-related">
+        <div class="module">
+            <h2>ACTUALIZAR</h2>
+            <div style="padding: 0 1rem;">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {% for product in products %}
+                        <input type="hidden" name="_selected_action" value="{{ product.id }}">
+                    {% endfor %}
+                    <input type="number" name="price" id="Precio">
+
+                    <input type="hidden" name="action" value="set_price">
+                    <input type="submit" name="apply" value="Actualizar Precio">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.body.className="dashboard"
+    </script>
+{% endblock %}

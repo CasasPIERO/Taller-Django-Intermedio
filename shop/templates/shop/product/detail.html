@@ -1,0 +1,26 @@
+{% extends "shop/base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <img src="{{ product.image.url }}" alt="Generic product" class="img-fluid">
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <span class="text-primary float-end">${{ product.price }}.00</span>
+                    <h5>{{ product }}</h5>
+                    <p>{{ product.description }}</p>
+                    <form action="{% url 'shop:cart-add' product.id %}" method="post">
+                        {% csrf_token %}
+                        <div class="input-group mb-3">
+                            {{ form.quantity }}
+                            <button type="submit" class="btn btn-primary">Add to cart</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

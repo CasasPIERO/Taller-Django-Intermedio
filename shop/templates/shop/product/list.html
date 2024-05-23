@@ -1,0 +1,21 @@
+{% extends "shop/base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h1>Productos</h1>
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <span class="text-primary float-end">${{ product.price }}.00</span>
+                    <h5>{{ product }}</h5>
+                    <p>{{ product.description }}</p>
+                    {{ product.created_at | date:"d/m/Y" }}
+                    <a href="{% url 'shop:product-detail' product.id %}" class="btn btn-primary">Ver más</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
